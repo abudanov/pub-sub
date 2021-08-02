@@ -4,12 +4,14 @@ import io.github.abudanov.pubsub.commondata.dto.MessageDto;
 import io.github.abudanov.pubsub.subscriber.entity.SubscriptionEntity;
 import io.github.abudanov.pubsub.subscriber.repository.SubscriptionRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 
 @Service("SUBSCRIPTION")
+@Slf4j
 @RequiredArgsConstructor
 public class SubscriptionHandler implements Handler<MessageDto> {
 
@@ -19,6 +21,7 @@ public class SubscriptionHandler implements Handler<MessageDto> {
     @Override
     public void handle(MessageDto messageDto) {
         SubscriptionEntity entity = dtoToEntity(messageDto);
+        log.info("Saving a entity " + entity);
         subscriptionRepository.save(entity);
     }
 

@@ -36,7 +36,11 @@ public class SendMessageTask implements Runnable {
                 Action.values()[random.nextInt(Action.values().length)],
                 Instant.now().getEpochSecond()
         );
-        ResponseEntity<String> response = subscriberClient.sendMessage(dto);
-        log.info("Message was send. Request: " + dto + "; response: " + response.toString());
+        try {
+            ResponseEntity<String> response = subscriberClient.sendMessage(dto);
+            log.info("Message was send. Request: " + dto + "; response: " + response.toString());
+        } catch (RuntimeException e) {
+            log.error("Error while sending a message", e);
+        }
     }
 }
