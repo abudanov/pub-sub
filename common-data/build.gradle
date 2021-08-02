@@ -1,0 +1,21 @@
+plugins {
+    id "io.freefair.lombok" version "6.1.0-m3"
+    id 'java'
+}
+
+group = 'io.github.abudanov.pubsub'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+}
+
+test {
+    useJUnitPlatform()
+}

@@ -1,0 +1,6 @@
+rootProject.name = 'pub-sub'
+
+include ':publisher'
+include ':subscriber'
+include ':common-data'
+
