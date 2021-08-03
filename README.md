@@ -3,6 +3,20 @@
 * Spring Boot, Spring Web
 * Postgres
 * Lombok
+* Gradle
+
+## Запуск 
+
+```shell
+$ make build
+$ make run-subscriber
+```
+
+После того как запустится subscriber, можно запускать publisher:
+
+```shell
+$ make run-publisher
+```
 
 ## Задача
 
@@ -54,7 +68,7 @@ SUBSCRIPTION. Значение выбирается рандомно при ге
 
 ### Общие требования:
 
-* Использование JAVA, Spring(модули на ваше усмотрение)
+* Использование JAVA, Spring (модули на усмотрение)
 * Все данные хранятся в БД (предпочтительно Postgres)
 * Наличие текстового логирования
 
