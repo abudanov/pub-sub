@@ -1,10 +1,12 @@
 package io.github.abudanov.pubsub.subscriber.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.Hibernate;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.sql.Timestamp;
 import java.util.Objects;
 
@@ -12,7 +14,11 @@ import java.util.Objects;
 @Table(name = "SUBSCRIPTION")
 @Setter
 @Getter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class SubscriptionEntity {
+
     @Id
     private Long id;
 
@@ -21,19 +27,6 @@ public class SubscriptionEntity {
 
     @Column(name = "timestamp", nullable = false)
     private Timestamp timestamp;
-
-    public SubscriptionEntity() {}
-
-    public SubscriptionEntity(
-            Long id,
-            Long msisdn,
-            Timestamp timestamp
-    ) {
-
-        this.id = id;
-        this.msisdn = msisdn;
-        this.timestamp = timestamp;
-    }
 
     @Override
     public boolean equals(Object o) {

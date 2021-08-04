@@ -5,7 +5,24 @@
 * Lombok
 * Gradle
 
+## Make
+
+Для упрощения управления вместо `gradle` можно использовать `make`:
+
+```bash
+$ make build  # gradle bootJar
+$ make run-subscriber  # java -jar subscriber/build/libs/*.jar 
+$ make run-publisher  # java -jar publisher/build/libs/*.jar  
+$ make tests  # gradle test
+$ make clean  # gradle clean
+```
+
 ## Запуск 
+
+Для запуска потребуется Postgres. 
+```shell
+$ docker run --name subscriber-postgres -p 5432:5432 -e POSTGRES_USER=subscriber -e POSTGRES_PASSWORD=subscriber -d postgres
+```
 
 ```shell
 $ make build
@@ -108,8 +125,8 @@ SUBSCRIPTION. Значение выбирается рандомно при ге
 Настройки:
 * `spring.datasource.url` - адрес подключения к БД, 
   по умолчанию `jdbc:postgresql://localhost:5432/postgres`
-* `spring.datasource.username` - логин от БД, по умолчанию `compose-postgres`
-* `spring.datasource.password` - пароль от БД, по умолчанию `compose-postgres`
+* `spring.datasource.username` - логин от БД, по умолчанию `subscriber`
+* `spring.datasource.password` - пароль от БД, по умолчанию `subscriber`
 
 Сервис принимает сообщение по HTTP, по `Action` определяет обработчика и
 передаёт ему сообщение. Каждый обработчик конвертирует полученный 

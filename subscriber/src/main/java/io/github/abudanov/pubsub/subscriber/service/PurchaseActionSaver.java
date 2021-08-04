@@ -1,6 +1,7 @@
 package io.github.abudanov.pubsub.subscriber.service;
 
 import io.github.abudanov.pubsub.commondata.dto.MessageDto;
+import io.github.abudanov.pubsub.commondata.value.Action;
 import io.github.abudanov.pubsub.subscriber.entity.PurchaseEntity;
 import io.github.abudanov.pubsub.subscriber.repository.PurchaseRepository;
 import lombok.RequiredArgsConstructor;
@@ -9,17 +10,22 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 
-@Service("PURCHASE")
+@Service
 @Slf4j
 @RequiredArgsConstructor
-public class PurchaseHandler implements Handler<MessageDto> {
+public class PurchaseActionSaver implements ActionSaver<MessageDto> {
 
     private final PurchaseRepository purchaseRepository;
 
     @Override
-    public void handle(MessageDto messageDto) {
+    public Action getSupportedAction() {
+        return Action.PURCHASE;
+    }
+
+    @Override
+    public void save(MessageDto messageDto) {
         PurchaseEntity entity = dtoToEntity(messageDto);
-        log.info("Saving a entity " + entity);
+        log.info("Saving entity {}",entity);
         purchaseRepository.save(entity);
     }
 

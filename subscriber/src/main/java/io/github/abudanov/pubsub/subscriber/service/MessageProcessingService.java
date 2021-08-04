@@ -1,25 +1,30 @@
 package io.github.abudanov.pubsub.subscriber.service;
 
 import io.github.abudanov.pubsub.commondata.dto.MessageDto;
-import lombok.RequiredArgsConstructor;
+import io.github.abudanov.pubsub.commondata.value.Action;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
-@RequiredArgsConstructor
 public class MessageProcessingService {
 
-    @Autowired
-    private final Map<String, Handler<MessageDto>> actionNameToMessageHandlerMap;
+    private final Map<Action, ActionSaver<MessageDto>> actionSaverMap;
+
+    public MessageProcessingService(List<ActionSaver<MessageDto>> actionSavers) {
+        this.actionSaverMap = actionSavers.stream()
+                .collect(
+                        Collectors.toMap(ActionSaver::getSupportedAction, actionSaver -> actionSaver)
+                );
+    }
 
     public void process(MessageDto messageDto) {
-        String actionName = messageDto.getAction().name();
-        Handler<MessageDto> handler = actionNameToMessageHandlerMap.get(actionName);
-        log.info("Define the " + handler.getClass().getSimpleName() + " for the " + actionName + " action");
-        handler.handle(messageDto);
+        ActionSaver<MessageDto> actionSaver = actionSaverMap.get(messageDto.getAction());
+        log.info("Define the {} for the {} action", actionSaver, messageDto.getAction());
+        actionSaver.save(messageDto);
     }
 }

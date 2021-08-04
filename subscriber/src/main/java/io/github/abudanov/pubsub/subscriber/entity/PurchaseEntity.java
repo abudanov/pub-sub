@@ -1,8 +1,6 @@
 package io.github.abudanov.pubsub.subscriber.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.Column;
@@ -17,27 +15,18 @@ import java.util.Objects;
 @Setter
 @Getter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class PurchaseEntity {
+
     @Id
     private Long id;
 
     @Column(name = "msisdn", nullable = false)
     private Long msisdn;
 
-    @Column(name = "timestamp")
+    @Column(name = "timestamp", nullable = false)
     private Timestamp timestamp;
-
-    public PurchaseEntity(
-            Long id,
-            Long msisdn,
-            Timestamp timestamp
-    ) {
-        this.id = id;
-        this.msisdn = msisdn;
-        this.timestamp = timestamp;
-    }
-
-    public PurchaseEntity() {}
 
     @Override
     public boolean equals(Object o) {

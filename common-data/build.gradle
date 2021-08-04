@@ -1,5 +1,5 @@
 plugins {
-    id "io.freefair.lombok" version "6.1.0-m3"
+    id "io.freefair.lombok" version "5.3.3.3"
     id 'java'
 }
 
@@ -14,8 +14,4 @@ repositories {
 dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
-}
-
-test {
-    useJUnitPlatform()
 }
