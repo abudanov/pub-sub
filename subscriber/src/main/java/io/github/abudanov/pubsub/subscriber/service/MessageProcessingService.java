@@ -24,7 +24,11 @@ public class MessageProcessingService {
 
     public void process(MessageDto messageDto) {
         ActionSaver<MessageDto> actionSaver = actionSaverMap.get(messageDto.getAction());
-        log.info("Define the {} for the {} action", actionSaver, messageDto.getAction());
-        actionSaver.save(messageDto);
+        if (actionSaver != null) {
+            log.info("Define the {} for the {} action", actionSaver, messageDto.getAction());
+            actionSaver.save(messageDto);
+        } else {
+            throw new UnsupportedOperationException(messageDto.getAction().name());
+        }
     }
 }

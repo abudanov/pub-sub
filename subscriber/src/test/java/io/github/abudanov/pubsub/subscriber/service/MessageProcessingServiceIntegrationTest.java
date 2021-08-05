@@ -6,7 +6,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
@@ -26,8 +25,6 @@ class MessageProcessingServiceIntegrationTest {
 
     @BeforeEach
     public void init() {
-        MockitoAnnotations.openMocks(this);
-
         doNothing().when(mockPurchaseActionSaver).save(isA(MessageDto.class));
         when(mockPurchaseActionSaver.getSupportedAction()).thenReturn(Action.PURCHASE);
 

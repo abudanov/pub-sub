@@ -29,7 +29,7 @@ class MessageControllerTest {
 
     @Test
     void create() throws Exception {
-        MessageDto messageDto = new MessageDto(1, 79999999999L, Action.PURCHASE, System.currentTimeMillis()/1000);
+        MessageDto messageDto = new MessageDto(1, 79999999999L, Action.PURCHASE, System.currentTimeMillis() / 1000);
 
         doNothing().when(service).process(messageDto);
 

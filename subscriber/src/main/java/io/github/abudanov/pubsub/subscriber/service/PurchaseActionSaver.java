@@ -25,7 +25,7 @@ public class PurchaseActionSaver implements ActionSaver<MessageDto> {
     @Override
     public void save(MessageDto messageDto) {
         PurchaseEntity entity = dtoToEntity(messageDto);
-        log.info("Saving entity {}",entity);
+        log.info("Saving entity {}", entity);
         purchaseRepository.save(entity);
     }
 
